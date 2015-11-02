@@ -2,6 +2,7 @@ var fs = require('fs')
 
 function colorTransformer (err, data) { // data is a buffer
   // if err, then do not transform file
+  // if the last 3 characters of process.argv[2] are not 'bmp', then do not transform file
 
   var headerField = data.slice(0, 2).toString('ascii')
   var fileByteLength = data.readUIntLE(2, 6)
@@ -62,7 +63,7 @@ function colorTransformer (err, data) { // data is a buffer
     }
   }
 
-  fs.writeFile('./transformed_' + process.argv[2], data, function (err, data) {
+  fs.writeFile('./' + process.argv[2].slice(0, process.argv[2].length - 4) + '_transformed' + process.argv[2].slice(-4), data, function (err, data) {
     if (err) console.log(err)
   })
 }
