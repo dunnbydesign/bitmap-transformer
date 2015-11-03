@@ -6,7 +6,7 @@
 To transform a bitmap image, a file with an extension of ".bmp" needs to be located in the root directory of the project repository, or one of its subdirectories. To transform a file in the Command Line (Terminal) type "node transform [filePath]", where [filePath] is a string that represents the relative path (directory and file name) of the where the bitmap file is located.
 
 
-### Tranformation
+### Transformation
 
 This project allows a user to invert the colors within each pixel in a bitmap file. In other words, every color value within a pixel will be subtracted from the maximum possible color value (255).
 
