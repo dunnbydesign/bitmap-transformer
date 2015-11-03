@@ -3,9 +3,6 @@ var fs = require('fs')
 function colorTransformer (err, data) {
   if (err || process.argv[2].slice(-4) !== '.bmp') {
     console.error('Error: unable to transform file')
-    return {
-      'error': true
-    }
   } else {
     var headerField = data.slice(0, 2).toString('ascii')
     var fileByteLength = data.readUIntLE(2, 6)
@@ -36,18 +33,6 @@ function colorTransformer (err, data) {
 
     if (cond1 || cond2 || cond3 || cond4 || cond5 || cond6) {
       console.error('Error: unable to transform file')
-      return {
-        'error': true,
-        'headerField': headerField,
-        'fileByteLength': fileByteLength,
-        'fileBufferLength': fileBufferLength,
-        'pixelArrayByteOffset': pixelArrayByteOffset,
-        'dibHeaderByteLength': dibHeaderByteLength,
-        'pixelArrayByteLength': pixelArrayByteLength,
-        'bitmapPixelWidth': bitmapPixelWidth,
-        'bitmapPixelHeight': bitmapPixelHeight,
-        'bitsPerPixel': bitsPerPixel
-      }
     } else {
       var pixelByteLength
       switch (bitsPerPixel) {
@@ -78,21 +63,6 @@ function colorTransformer (err, data) {
       fs.writeFile('./' + process.argv[2].slice(0, process.argv[2].length - 4) + '_transformed' + process.argv[2].slice(-4), data, function (err, data) {
         if (err) console.log(err)
       })
-
-      return {
-        'error': false,
-        'headerField': headerField,
-        'fileByteLength': fileByteLength,
-        'fileBufferLength': fileBufferLength,
-        'pixelArrayByteOffset': pixelArrayByteOffset,
-        'dibHeaderByteLength': dibHeaderByteLength,
-        'pixelArrayByteLength': pixelArrayByteLength,
-        'bitmapPixelWidth': bitmapPixelWidth,
-        'bitmapPixelHeight': bitmapPixelHeight,
-        'bitsPerPixel': bitsPerPixel,
-        'pixelByteLength': pixelByteLength,
-        'rowByteLength': rowByteLength
-      }
     }
   }
 }
